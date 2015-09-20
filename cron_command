@@ -1,0 +1,31 @@
+# scripts.mit.edu sample crontab as of Sun Sep 20 13:12:14 EDT 2015
+# To load this crontab, run "cronload crontab" in your cron_scripts directory
+# (On athena, you must run "add scripts" before cronload)
+
+# This line sets a reasonable default path
+PATH=/mit/hcope/cron_scripts:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/X11R6/b$
+
+# This line mails the STDOUT and STDERR of every cron script to a person
+# (can be useful for debugging)
+# You can always redirect the output of individual commands to /dev/null
+MAILTO="hcope@mit.edu"
+# If you do not want to receive any mail from cron, use the line below instead
+#MAILTO=""
+
+# Add your cron lines here:
+0,5,10,15,20,25,30,35,40,45,50,55 * * * * python ~/Programming/climbing_script.py
+
+# Here's a reminder of the cron line format:
+
+#  * * * * * command to be executed
+#  - - - - -
+#  | | | | |
+#  | | | | ----- day of week (0 - 6) (Sunday=0)
+#  | | | ------- month (1 - 12)
+#  | | --------- day of month (1 - 31)
+#  | ----------- hour (0 - 23)
+#  ------------- min (0 - 59)
+
+# For example, the following cron line would write "Work harder!" to STDOUT
+# every 20 minutes from 8am - 5pm on weekdays
+# (and this message would thus be e-mailed to the address above on each run)
