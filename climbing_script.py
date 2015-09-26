@@ -9,8 +9,8 @@ html = BeautifulSoup(openWallPage, "html.parser")
 openEntry = str(html.find_all(class_="entry open"))[1:-1]
 currentStatus = str(html.find_all(class_="name "))[1:-1]
 
-statusFile = open("statusFile.txt", "r+")
-previousStatus = statusFile.readlines()
+with open("statusFile.txt", "r") as statusFile:
+    previousEntry = statusFile.readlines()[0]
 
 if currentStatus in openEntry:
   if previousStatus == "closed\n"
@@ -26,8 +26,8 @@ if currentStatus in openEntry:
     server.ehlo()
     server.login("MIT_Username", "Password")
     server.sendmail(fromAddress, toAddress, text)
-    previousStatus[0] = "open\n"
-    statusFile.writelines(previousStatus)
+    with open("statusFile.txt", "w") as statusFile:
+      statusFile.write("open\n")
 else:
-  previousStatus[0] = "closed\n"
-  statusFile.writelines(previousStatus)
+  with open("statusFile.txt", "w") as statusFile:
+    statusFile.write("closed\n")
